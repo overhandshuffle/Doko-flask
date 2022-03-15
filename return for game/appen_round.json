@@ -1,0 +1,26 @@
+{
+    "spielerArray": [
+        {
+            "id": 1,
+            "partei": "Re",
+            "punkte": 18
+        },
+        {
+            "id": 2,
+            "partei": "Kontra",
+            "punkte": -6
+        },
+        {   
+            "id": 3,
+            "partei": "Kontra",
+            "punkte": -6
+        },
+        {
+            "id": 4,
+            "partei": "Kontra",
+            "punkte": -6
+        }
+    ],
+    "punkte": 6,
+    "solo": "40d85dd5-379a-4af0-a493-95e21ed825f5"
+}

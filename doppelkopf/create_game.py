@@ -14,10 +14,14 @@ def create(playerArray):
     player2_id = playerArray["player2"]["user_id"]
     player3_id = playerArray["player3"]["user_id"]
     player4_id = playerArray["player4"]["user_id"]
+    try:
+        player5_id = playerArray["player5"]["user_id"]
+    except:
+        player5_id=None
 
-
+    print(player5_id)
     game = Game(timestamp=dt_string, player1_id=player1_id,
-                player2_id=player2_id, player3_id=player3_id, player4_id=player4_id)
+                player2_id=player2_id, player3_id=player3_id, player4_id=player4_id, player5_id=player5_id)
     db.session.add(game)
     db.session.commit()
     

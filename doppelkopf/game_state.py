@@ -4,7 +4,6 @@ import json
 
 def game_state(game_id):
     game = Game.query.filter_by(game_id=game_id).first()
-
     gamestate = {
         "_id": game_id,
         "runden": [],
@@ -14,13 +13,13 @@ def game_state(game_id):
     # this section is for player related information
     players = [game.player1_id, game.player2_id,
                game.player3_id, game.player4_id]
-    aus = False
+    
+    aus = 6
     if game.player5_id != None:
         players.append(game.player5_id)
-        aus = len((Rounds.query.filter_by(
-            game_id=game_id).all())-1) % len(players)
+        aus = len(Rounds.query.filter_by(game_id=game_id).all()) % len(players)
 
-    raus = len(Rounds.query.filter_by(game_id=game_id).all()) % len(players)
+    raus = (len(Rounds.query.filter_by(game_id=game_id).all())+1) % len(players)
 
     for i, player in enumerate(players):
         pl = User.query.filter_by(user_id=player).first()
@@ -30,8 +29,12 @@ def game_state(game_id):
             outi = True
         else:
             outi = False
+        if i == aus and aus!=6:
+            auss = True
+        else:
+            auss = False
         spielerer = {
-            "aussetzen": aus,
+            "aussetzen": auss,
             "id": player,
             "kommt_raus": outi,
             "name": name

@@ -9,8 +9,12 @@ def check_name(name):
     player_list = []
     for user in User.query.all():
         if user.username.startswith(name):
+            try:
+                addedfromname= User.query.filter_by(user_id=user.added_from).first().username
+            except:
+                addedfromname="unknown"
             player_list.append(
-                {"username": user.username, "user_id": user.user_id})
+                {"username": user.username, "user_id": user.user_id, "added_from": addedfromname})
 
     return player_list
 

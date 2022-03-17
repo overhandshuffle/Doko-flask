@@ -8,7 +8,7 @@ def check_name(name):
 
     player_list = []
     for user in User.query.all():
-        if user.username.startswith(name):
+        if user.username.lower().startswith(name.lower()):
             try:
                 addedfromname= User.query.filter_by(user_id=user.added_from).first().username
             except:
@@ -17,6 +17,7 @@ def check_name(name):
                 {"username": user.username, "user_id": user.user_id, "added_from": addedfromname})
 
     return player_list
+    return 
 
 
 def add_new_player(added_from, new_user):

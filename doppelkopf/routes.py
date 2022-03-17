@@ -13,7 +13,7 @@ def login():
 
     # überprüfen ob Passwort korrekt ist
     if not jwt_login.password_check(username, password):
-        return jsonify({"msg": "Bad username or password"}), 401
+        return jsonify({"msg": "Bad username or password"}), 406
 
     # bei erfolgreicehr anmeldung Tokenübermittelung an Client
     access_token = create_access_token(
@@ -43,7 +43,10 @@ def game(gameId):
 @app.route('/namelist/<name>', methods=["GET"])
 @jwt_required()
 def name_list(name):
-    return ({"player": player.check_name(name)})
+    if len(name)>2:
+        return ({"player": player.check_name(name)})
+    else:
+        return jsonify({"msg": "more characters"}), 406
 
 @app.route('/new_player', methods=["POST"])
 @jwt_required()

@@ -13,7 +13,12 @@ def append(json, gameId):
 
             timestamp = now.strftime("%d/%m/%Y %H:%M:%S")
 
-            round = Rounds(game_id=gameId, timestamp=timestamp)
+            try:
+                bock = json["bock"]
+            except:
+                bock = False
+
+            round = Rounds(game_id=gameId, timestamp=timestamp, bock=bock)
             db.session.add(round)
             db.session.commit()
             for user in json["spielerArray"]:

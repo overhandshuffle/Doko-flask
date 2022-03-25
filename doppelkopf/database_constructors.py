@@ -39,7 +39,8 @@ class Rounds(db.Model):
     game_id = db.Column("game_id", db.Integer, ForeignKey("game.game_id"))
     round_id = db.Column("round_id", db.Integer, primary_key=True)
     timestamp = db.Column("timestamp", db.String(100), nullable=False)
-
+    bock = db.Column("bock", db.Boolean, nullable=True)
+   
 
 class RoundsXPlayer(db.Model):
 

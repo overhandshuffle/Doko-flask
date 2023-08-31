@@ -1,12 +1,10 @@
-from datetime import date, datetime
-import uuid
+from datetime import datetime
+
 from doppelkopf import db
+from doppelkopf.database_constructors import Game
 
-from doppelkopf.database_constructors import User, Game
 
-
-def create(playerArray):
-
+def create(playerArray, maxBock, soloKommtRaus):
     now = datetime.now()
     dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
 
@@ -14,16 +12,20 @@ def create(playerArray):
     player2_id = playerArray["player2"]["user_id"]
     player3_id = playerArray["player3"]["user_id"]
     player4_id = playerArray["player4"]["user_id"]
-    try:
+    if (playerArray["player5"]):
         player5_id = playerArray["player5"]["user_id"]
-    except:
-        player5_id=None
+    else:
+        player5_id = None
 
-    print(player5_id)
-    game = Game(timestamp=dt_string, player1_id=player1_id,
-                player2_id=player2_id, player3_id=player3_id, player4_id=player4_id, player5_id=player5_id)
+    game = Game(timestamp=dt_string,
+                player1_id=player1_id,
+                player2_id=player2_id,
+                player3_id=player3_id,
+                player4_id=player4_id,
+                player5_id=player5_id,
+                maxBock=maxBock,
+                soloKommtRaus=soloKommtRaus)
     db.session.add(game)
     db.session.commit()
-    
-   
-    return {"_id":game.game_id}
+
+    return {"_id": game.game_id}

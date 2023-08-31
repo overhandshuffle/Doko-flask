@@ -1,9 +1,8 @@
-import jwt
-from doppelkopf import app, db
-from doppelkopf import player, append_round, database_constructors
+from doppelkopf import app
 
 
 if __name__ == "__main__":
-    #import zwischenstand
-    #zwischenstand.chart(41)
-    app.run(host="0.0.0.0", debug=True)
+    #app.run(host="0.0.0.0", debug=True)
+    
+    from doppelkopf import groups
+    groups.groups_all(8)

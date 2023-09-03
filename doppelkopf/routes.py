@@ -48,6 +48,7 @@ def game_route(gameId):
 def lockGame(gameId):
     if not append_round.lock(gameId):
         return "gameID not found", status.HTTP_400_BAD_REQUEST
+    append_round.insert_finalscore(gameId)
     return jsonify(game_state.game_state(gameId))
 
 

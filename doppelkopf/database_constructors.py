@@ -11,7 +11,8 @@ class User(db.Model):
     username = db.Column("username", db.String(100), nullable=False)
     password = db.Column("password", db.String(100), nullable=True)
     email = db.Column("email", db.String(100), nullable=True)
-    added_from = db.Column("added_from", db.Integer, ForeignKey("user.user_id"), nullable=True)
+    added_from = db.Column("added_from", db.Integer,
+                           ForeignKey("user.user_id"), nullable=True)
     last_login = db.Column("last_login", db.DATETIME, nullable=True)
 
     def __repr__(self):
@@ -70,12 +71,23 @@ class RoundsXPlayer(db.Model):
     solotyp = db.Column("solotyp", db.String, nullable=True)
 
 
+class FinalScore(db.Model):
+    id = db.Column("id", db.Integer, primary_key=True)
+    game_id = db.Column("game_id", db.Integer, ForeignKey("game.game_id"))
+    player1_score = db.Column("player1_score", db.Integer, nullable=False)
+    player2_score = db.Column("player2_score", db.Integer, nullable=False)
+    player3_score = db.Column("player3_score", db.Integer, nullable=False)
+    player4_score = db.Column("player4_score", db.Integer, nullable=False)
+    player5_score = db.Column("player5_score", db.Integer, nullable=True)
+
+
 # only creates db if not existing
 db.create_all()
 
 # create admin user if user table is empty
 if len(User.query.all()) == 0:
-    hashed = bcrypt.hashpw("1234".encode('UTF-8'), bcrypt.gensalt()).decode("utf-8")
+    hashed = bcrypt.hashpw("1234".encode(
+        'UTF-8'), bcrypt.gensalt()).decode("utf-8")
     test = User(username="admin", added_from=None, password=hashed)
     db.session.add(test)
     db.session.commit()

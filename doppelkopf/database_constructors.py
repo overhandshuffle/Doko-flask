@@ -64,11 +64,11 @@ class RoundsXPlayer(db.Model):
     round_id = db.Column("round_id", db.Integer, ForeignKey("rounds.round_id"))
     user_id = db.Column("user_id", db.Integer, ForeignKey("user.user_id"))
     punkte = db.Column("punkte", db.Integer)
-    partei = db.Column("partei", db.String)
-    hochzeit = db.Column("hochzeit", db.String, nullable=True)
-    schweine = db.Column("schweine", db.String, nullable=True)
+    partei = db.Column("partei", db.String(100))
+    hochzeit = db.Column("hochzeit", db.String(100), nullable=True)
+    schweine = db.Column("schweine", db.String(100), nullable=True)
     armut = db.Column("armut", db.Integer, nullable=True)
-    solotyp = db.Column("solotyp", db.String, nullable=True)
+    solotyp = db.Column("solotyp", db.String(100), nullable=True)
 
 
 class FinalScore(db.Model):

@@ -11,7 +11,7 @@ from datetime import datetime
 
 def insert_games():
     query = db.engine.execute(
-        "Select game_id, player1_id, player2_id, player3_id, player4_id, player5_id FROM Game Where Game.locked IS NOT NULL;")
+        "Select game_id, player1_id, player2_id, player3_id, player4_id, player5_id FROM game Where game.locked IS NOT NULL;")
     for entry in query:
         try:
             state = game_state(entry.game_id)["runden"][-1]["spielerArray"]
